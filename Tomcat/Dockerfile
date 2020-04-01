@@ -27,8 +27,8 @@ RUN apk add --update curl &&\
   rm -f apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz.md5 &&\
   ln -s /opt/apache-tomcat-${TOMCAT_VERSION_FULL} /opt/tomcat &&\
   rm -rf /opt/tomcat/webapps/examples /opt/tomcat/webapps/docs &&\
-  apk del curl &&\
-  rm -rf /var/cache/apk/*
+ #  apk del curl &&\
+ #  rm -rf /var/cache/apk/*
 
 # Launch Tomcat on startup
 # CMD ${CATALINA_HOME}/bin/catalina.sh run
