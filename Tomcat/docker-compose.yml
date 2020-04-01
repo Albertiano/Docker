@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  tomcat:
+    build: .
+    image: test-img
+    ports:
+      - 8080:8080
+    networks:
+      - tomcat
+    restart: always
+  
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: albertiano
+      ME_CONFIG_BASICAUTH_PASSWORD: Senha711990
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Senha711990
+    links:
+      - mongo
+    networks:
+      - mongo-compose-network
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Senha711990
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo-compose-network
+
+networks:
+  tomcat:
+    driver: bridge
+  mongo-compose-network:
+      driver: bridge
