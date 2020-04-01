@@ -9,8 +9,8 @@ ENV JAVA_HOME /opt/jdk
 ENV PATH ${PATH}:${JAVA_HOME}/bin
 ENV JAVA_PACKAGE server-jre
 
-ENV TOMCAT_VERSION_MAJOR 9
-ENV TOMCAT_VERSION_FULL  9.0.33
+ENV TOMCAT_VERSION_MAJOR 8
+ENV TOMCAT_VERSION_FULL  8.5.14
 ENV CATALINA_HOME /opt/tomcat
 
 # Download and install Java
@@ -27,9 +27,10 @@ RUN apk add --update curl &&\
   rm -f apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz.md5 &&\
   ln -s /opt/apache-tomcat-${TOMCAT_VERSION_FULL} /opt/tomcat &&\
   rm -rf /opt/tomcat/webapps/examples /opt/tomcat/webapps/docs &&\
- #  apk del curl &&\
- #  rm -rf /var/cache/apk/*
+  apk del curl &&\
+  rm -rf /var/cache/apk/*
+
+COPY api.war /opt/tomcat/webapps/
 
 # Launch Tomcat on startup
-# CMD ${CATALINA_HOME}/bin/catalina.sh run
-CMD ["catalina.sh", "run"]
+CMD ${CATALINA_HOME}/bin/catalina.sh run
