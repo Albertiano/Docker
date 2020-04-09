@@ -26,6 +26,16 @@ services:
     networks:
       - mongo-compose-network
 
+  restore:
+    image: mongo
+    volumes:
+      - ./dump:/var/dump
+    links:
+      - mongo:mongo
+    networks:
+      - mongo-compose-network
+    command: mongorestore -u root -p Senha711990 --gzip --archive=/var/dump/bkp --drop --host mongo
+  
 networks: 
     mongo-compose-network:
       driver: bridge

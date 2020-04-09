@@ -1,0 +1,1 @@
+docker-compose exec -T db mongorestore -u albertiano -p=Senha711990 --archive --gzip < bkp

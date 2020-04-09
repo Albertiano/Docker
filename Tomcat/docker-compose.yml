@@ -5,7 +5,9 @@ services:
     build: .
     image: tomcat-img
     ports:
-      - 8080:8080
+      - 8090:8090
+    depends_on: 
+      - mongo
     networks:
       - tomcat
     restart: always
